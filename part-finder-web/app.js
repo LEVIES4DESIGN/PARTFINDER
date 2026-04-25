@@ -47,6 +47,9 @@
   const STORAGE_STORE_NAME = "projects";
   const DEFAULT_PROJECT_REGISTRY = "./projects.json";
   const GITHUB_SETTINGS_KEY = "legno-part-finder-github-settings";
+  const DEFAULT_GITHUB_OWNER = "levies4design";
+  const DEFAULT_GITHUB_REPO = "PARTFINDER";
+  const DEFAULT_GITHUB_BRANCH = "main";
 
   function supportsIndexedDb() {
     return typeof window.indexedDB !== "undefined";
@@ -95,9 +98,9 @@
     const stored = loadGithubSettings();
     const inferred = inferGithubPagesRepo() || {};
 
-    if (els.githubOwner) els.githubOwner.value = stored.owner || inferred.owner || "";
-    if (els.githubRepo) els.githubRepo.value = stored.repo || inferred.repo || "";
-    if (els.githubBranch) els.githubBranch.value = stored.branch || inferred.branch || "main";
+    if (els.githubOwner) els.githubOwner.value = stored.owner || inferred.owner || DEFAULT_GITHUB_OWNER;
+    if (els.githubRepo) els.githubRepo.value = stored.repo || inferred.repo || DEFAULT_GITHUB_REPO;
+    if (els.githubBranch) els.githubBranch.value = stored.branch || inferred.branch || DEFAULT_GITHUB_BRANCH;
   }
 
   function openStorageDb() {
