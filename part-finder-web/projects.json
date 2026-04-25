@@ -1,15 +1,10 @@
 {
-  "default_project": "mr-ajith-final-production-skp",
+  "default_project": "mr-ajith-production-v1-skp",
   "projects": [
     {
-      "key": "mr-ajith-final-production-skp",
-      "name": "Mr Ajith Final production.skp",
-      "source": "./data/mr-ajith-final-production-skp.json"
-    },
-    {
-      "key": "mr-ajith-final-production-skp-2",
-      "name": "Mr Ajith Final production.skp",
-      "source": "./data/mr-ajith-final-production-skp-2.json"
+      "key": "mr-ajith-production-v1-skp",
+      "name": "Mr Ajith Production V1.skp",
+      "source": "./data/mr-ajith-production-v1-skp.json"
     }
   ]
 }
