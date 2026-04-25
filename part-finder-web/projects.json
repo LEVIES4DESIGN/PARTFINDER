@@ -1,4 +1,15 @@
 {
-  "default_project": "",
-  "projects": []
+  "default_project": "mr-ajith-final-production-skp",
+  "projects": [
+    {
+      "key": "mr-ajith-final-production-skp",
+      "name": "Mr Ajith Final production.skp",
+      "source": "./data/mr-ajith-final-production-skp.json"
+    },
+    {
+      "key": "mr-ajith-final-production-skp-2",
+      "name": "Mr Ajith Final production.skp",
+      "source": "./data/mr-ajith-final-production-skp-2.json"
+    }
+  ]
 }
