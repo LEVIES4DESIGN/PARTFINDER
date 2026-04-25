@@ -1,0 +1,73 @@
+window.LEGNO_SAMPLE_PARTS = {
+  meta: {
+    model_name: "LEGNO Sample Model"
+  },
+  parts: [
+    {
+      display_code: "A1.2",
+      entity_name: "CC_vertical",
+      definition_name: "VERTICAL_PARTITION",
+      part_name: "VERTICAL_PARTITION",
+      item_code: "PANEL",
+      material: "OSL2",
+      sub: "A1",
+      assembly_no: "A1.2",
+      unit: "GF",
+      floor: "GF",
+      room: "MASTER_BEDROOM",
+      path_text: "A1 > A1.2",
+      lenx_mm: "425",
+      leny_mm: "216",
+      lenz_mm: "17",
+      width_mm: "425",
+      depth_mm: "500",
+      height_mm: "216",
+      persistent_id: "42121",
+      full_label: "A1_MASTER_BEDROOM_A1.2"
+    },
+    {
+      display_code: "A1.5",
+      entity_name: "Bottom_Panel",
+      definition_name: "Bottom_Panel",
+      part_name: "Bottom_Panel",
+      item_code: "PANEL",
+      material: "RAWBOARD_PU",
+      sub: "A1",
+      assembly_no: "A1.5",
+      unit: "GF",
+      floor: "GF",
+      room: "MASTER_BEDROOM",
+      path_text: "A1 > A1.5",
+      lenx_mm: "500",
+      leny_mm: "716",
+      lenz_mm: "17",
+      width_mm: "500",
+      depth_mm: "580",
+      height_mm: "716",
+      persistent_id: "42112",
+      full_label: "A1_MASTER_BEDROOM_A1.5"
+    },
+    {
+      display_code: "B29.10",
+      entity_name: "CC_vertical",
+      definition_name: "VERTICAL_PARTITION",
+      part_name: "VERTICAL_PARTITION",
+      item_code: "PANEL",
+      material: "BSL",
+      sub: "B29",
+      assembly_no: "B29.10",
+      unit: "GF",
+      floor: "GF",
+      room: "FOYER",
+      path_text: "B29 > B29.10",
+      lenx_mm: "425",
+      leny_mm: "216",
+      lenz_mm: "17",
+      width_mm: "425",
+      depth_mm: "500",
+      height_mm: "216",
+      persistent_id: "42121",
+      full_label: "B29_FOYER_B29.10"
+    }
+  ]
+};
