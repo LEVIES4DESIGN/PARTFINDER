@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEGNO Part Finder Admin</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-mode="admin">
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">LEGNO Admin</p>
+        <h1>Part Finder Dataset Manager</h1>
+        <p class="hero-copy">
+          Choose the project folder, preview the JSON files here, and generate the user search link for this browser.
+        </p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-stat-label">Loaded Dataset</div>
+        <div class="hero-stat-value" id="dataset-name">No dataset loaded</div>
+        <div class="hero-stat-meta" id="dataset-meta">Choose a local project folder</div>
+      </div>
+    </header>
+
+    <section class="card admin-card">
+      <div class="panel-header">
+        <h2>Admin Controls</h2>
+        <p>
+          Choose the local project folder. The app will load every JSON file inside that folder, store it in this browser, and use it for the user page.
+        </p>
+      </div>
+
+      <div class="admin-alert">
+        <strong>Important:</strong> This local-folder method works on the same browser and device. For everyone to use the site, publish project JSON files online and update the hosted <code>projects.json</code> file in this site.
+      </div>
+
+      <div class="admin-grid">
+        <div class="toolbar-actions">
+          <label class="file-button file-button-primary">
+            <input id="project-folder" type="file" webkitdirectory directory multiple accept=".json,application/json,.pdf,application/pdf">
+            <span>Choose Project Folder</span>
+          </label>
+          <button id="generate-link-button" class="btn btn-secondary" type="button">Generate User Link</button>
+        </div>
+
+        <div class="toolbar-actions toolbar-actions-right">
+          <button id="clean-slate-button" class="btn btn-secondary" type="button">Clean Slate</button>
+          <button id="clear-projects-button" class="btn btn-secondary" type="button">Clear Stored Projects</button>
+          <button id="sample-button" class="btn btn-secondary" type="button">Load Sample</button>
+        </div>
+      </div>
+
+      <div class="toolbar-group generated-link">
+        <label for="generated-link">Shareable User Link</label>
+        <textarea id="generated-link" rows="3" readonly placeholder="Generated search link will appear here."></textarea>
+      </div>
+
+      <div class="toolbar-actions">
+        <button id="copy-link-button" class="btn btn-secondary" type="button">Copy User Link</button>
+      </div>
+
+      <div class="admin-notes">
+        <p><strong>Folder step:</strong> choose the local project folder that contains the exported JSON files and linked PDF files.</p>
+        <p><strong>PDF matching:</strong> name the PDF with the cabinet code at the start, like <code>F3 - CABINET.pdf</code> or <code>A21.pdf</code>. The app matches that root code to part numbers like <code>F3.1</code> or <code>A21.4</code>.</p>
+        <p><strong>Clean slate:</strong> removes the currently loaded local files from this browser and resets the admin page.</p>
+        <p><strong>Publish step:</strong> use the GitHub section below to upload those JSON files into this repo and update the shared <code>projects.json</code> file.</p>
+        <p><strong>User search mode:</strong> the public user page searches only by Part Number and Persistent ID.</p>
+      </div>
+
+      <div class="github-publish card">
+        <div class="panel-header compact">
+          <h2>Publish To GitHub</h2>
+          <p>Upload the loaded project JSON files into separate folders under <code>part-finder-web/data/</code> and update <code>projects.json</code>.</p>
+        </div>
+
+        <div class="github-main">
+          <div class="github-defaults">
+            <strong>Default target:</strong> <code>levies4design / PARTFINDER / main</code>
+          </div>
+
+          <div class="github-token-row">
+            <div class="toolbar-group github-token-group">
+              <label for="github-token">GitHub Token</label>
+              <input id="github-token" type="password" placeholder="Paste fine-grained token with Contents: write">
+            </div>
+            <div class="toolbar-actions github-publish-actions">
+              <button id="publish-github-button" class="btn btn-primary" type="button">Publish Projects</button>
+            </div>
+          </div>
+        </div>
+
+        <details class="github-advanced">
+          <summary>Advanced Repo Settings</summary>
+          <div class="github-grid">
+            <div class="toolbar-group">
+              <label for="github-owner">GitHub Owner</label>
+              <input id="github-owner" type="text" placeholder="Example: levies4design">
+            </div>
+            <div class="toolbar-group">
+              <label for="github-repo">Repository</label>
+              <input id="github-repo" type="text" placeholder="Example: PARTFINDER">
+            </div>
+            <div class="toolbar-group">
+              <label for="github-branch">Branch</label>
+              <input id="github-branch" type="text" placeholder="main">
+            </div>
+          </div>
+        </details>
+
+        <p class="github-note">
+          Usually you only need to paste the GitHub token and click publish. The token is used only for the publish request from this browser and is not stored. Use a fine-grained token with repository <code>Contents: write</code>.
+        </p>
+        <p id="github-publish-status" class="status-message">Load a project folder first, then publish it to GitHub.</p>
+      </div>
+    </section>
+
+    <section class="layout-grid">
+      <aside class="card results-panel">
+        <div class="panel-header">
+          <h2>Matches</h2>
+          <p>Use this preview to confirm the dataset behaves correctly before sharing the user link.</p>
+        </div>
+        <p id="status-message" class="status-message">Load a dataset to preview search results.</p>
+        <div id="results" class="results-list"></div>
+      </aside>
+
+      <main class="card details-panel">
+        <div class="panel-header">
+          <h2 id="detail-title">Part Details</h2>
+          <p id="detail-subtitle">Preview the part details that users will see after searching.</p>
+        </div>
+        <div class="toolbar toolbar-inline">
+          <div class="toolbar-group">
+            <label for="part-query">Preview Search</label>
+            <input id="part-query" type="text" placeholder="Example: A1.2 or 42121">
+          </div>
+          <div class="toolbar-actions">
+            <button id="find-button" class="btn btn-primary" type="button">Find Part</button>
+            <button id="clear-button" class="btn btn-secondary" type="button">Clear</button>
+          </div>
+        </div>
+        <div id="details-grid" class="details-grid"></div>
+      </main>
+    </section>
+
+    <section class="card pdf-panel">
+      <div class="panel-header">
+        <h2 id="pdf-title">Linked PDF</h2>
+        <p id="pdf-subtitle">Preview the linked PDF that users will see when they search for a matching part.</p>
+      </div>
+      <p id="pdf-status" class="status-message">No linked PDF selected yet.</p>
+      <div id="pdf-viewer" class="pdf-viewer is-hidden">
+        <div class="pdf-actions">
+          <a id="pdf-open-link" class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Open PDF in New Tab</a>
+        </div>
+        <iframe id="pdf-frame" title="Linked PDF Preview"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <script src="./sample-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
